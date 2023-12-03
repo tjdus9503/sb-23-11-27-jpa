@@ -2,7 +2,6 @@ package com.ll.sb231127jpa.domain.article.article.service;
 
 import com.ll.sb231127jpa.domain.article.article.entity.Article;
 import com.ll.sb231127jpa.domain.member.member.entity.Member;
-import com.ll.sb231127jpa.domain.member.member.service.MemberService;
 import com.ll.sb231127jpa.global.rsData.RsData;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,8 +18,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class ArticleServiceTest {
     @Autowired
     private ArticleService articleService;
-    @Autowired
-    private MemberService memberService;
 
     @DisplayName("글쓰기")
     @Test
@@ -35,10 +32,8 @@ public class ArticleServiceTest {
     @Test
     void t2() {
         Article article = articleService.findById(1L).get();
-        long authorId = article.getAuthorId();
+        Member author = article.getAuthor();
 
-        Member member = memberService.findById(authorId).get();
-
-        assertThat(member.getUsername()).isEqualTo("user1");
+        assertThat(author.getUsername()).isEqualTo("user1");
     }
 }
