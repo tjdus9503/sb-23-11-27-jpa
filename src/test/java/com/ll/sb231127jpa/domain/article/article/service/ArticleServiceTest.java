@@ -1,7 +1,6 @@
-package com.ll.sb231127jpa;
+package com.ll.sb231127jpa.domain.article.article.service;
 
-import com.ll.sb231127jpa.domain.member.member.entity.Member;
-import com.ll.sb231127jpa.domain.member.member.service.MemberService;
+import com.ll.sb231127jpa.domain.article.article.entity.Article;
 import com.ll.sb231127jpa.global.rsData.RsData;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,16 +14,16 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @SpringBootTest
 @ActiveProfiles("test")
 @Transactional
-public class MemberServiceTest {
+public class ArticleServiceTest {
     @Autowired
-    private MemberService memberService;
+    private ArticleService articleService;
 
-    @DisplayName("회원가입")
+    @DisplayName("글쓰기")
     @Test
     void t1() {
-        RsData<Member> joinRs = memberService.join("usernew", "1234");
-        Member member = joinRs.getData();
+        RsData<Article> writeRs = articleService.write("제목", "내용");
+        Article article = writeRs.getData();
 
-        assertThat(member.getId()).isGreaterThan(0L);
+        assertThat(article.getId()).isGreaterThan(0L);
     }
 }
